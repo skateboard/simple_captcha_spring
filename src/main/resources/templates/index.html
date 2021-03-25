@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Captcha Test</title>
+</head>
+<body>
+
+<img id="captcha_image" src="/captcha/">
+
+<input type="text" id="solution" placeholder="Solution">
+
+<button id="submit">Submit</button>
+
+<p id="message"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+
+<script>
+    const message = $("#message");
+
+    $(document).ready(function() {
+
+        $("#submit").on('click', function () {
+            const solution = $("#solution").val();
+
+            const payload = JSON.stringify({
+                solution: solution
+            });
+
+            (async () => {
+                const rawResponse = await fetch("/captcha/validate", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: payload
+                });
+                const content = await rawResponse.json();
+
+                if(content.status) {
+                    message.html("Passed")
+                } else {
+                    message.html("Failed")
+                }
+            }) ();
+        });
+
+        console.log("dsadasd");
+    });
+
+</script>
+
+</body>
+</html>
