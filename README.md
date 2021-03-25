@@ -1,2 +1,2 @@
-# simple_captcha_spring
-Simple Captcha Spring implementation
+# Simple Captcha Spring
+a implementation made for [Simple Captcha](https://github.com/skateboard/simple_captcha)
